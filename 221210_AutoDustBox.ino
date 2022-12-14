@@ -1,12 +1,14 @@
-//"221210_No Touch DustBox Servo Motor And Photo Reflector For Attiny13a" from @deckeye
-//Arduino から、”Arduino as ASP（MicroCore）” を使って、ATtiny13a に書き込みをして、サーボモーターを動かすプログラムです。
+//"221210_AutoDustBox.ino" from @deckeye
+//「ノータッチゴミ箱」のためのプログラムです。センサー(フォトリフレクタ)に手をかざすと、サーボモーターがフタを開いてくれる作品となります。
+//動画は、「ノータッチゴミ箱」で検索してみてください。
+//Arduino から、"Arduino as ISP (MicroCore)" を使って、ATtiny13a に書き込みをして、フォトリフレクタが遮られたら、サーボモーターを動かすプログラムです。
 //詳細などは、底部に書いておきます。
 
 #define PB2 3 //2番ピン
 #define PB0 0 //5番ピン
 
-unsigned int ServoHighMicroSec = 600; //500-2400μs。サーボモーターに流すパルス長。
-unsigned int ServoStatus = 600; //500-2400μs。サーボモーターに流すパルス長。
+unsigned int ServoHighMicroSec = 600; //500-2400μs。サーボモーターに流したいパルス長。
+unsigned int ServoStatus = 600; //500-2400μs。現在のサーボモーターに流しているパルス長。
 
 void setup() {
   pinMode(PB2, OUTPUT);
@@ -43,9 +45,6 @@ void loop() {
   ServoHighMicroSec = 1750;
   servo();
 }
-
-
-
 
 //設定項目など詳細情報
 //Arduino IDE Ver.1.8.13 で動作確認済み。2022年12月時点では、MocroCoreがIDEVer.2系には対応してないみたいです(エラーが出る。異論は募集中。)
